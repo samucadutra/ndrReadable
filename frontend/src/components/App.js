@@ -24,7 +24,8 @@ class App extends Component {
           </main>
         )}/>
         <Switch>
-          <Route exact path='/erro404' component={Erro404}/>
+          <Route exact path='/erro404'  render={ props => <Erro404 {...props} />}
+          />
           <Route exact path='/:categoria' render={(props) => (
             <main>
               <CategoriasList {...props}/>

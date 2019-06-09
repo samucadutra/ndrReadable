@@ -5,20 +5,36 @@ import { connect } from 'react-redux'
 import { capitalize } from '../utils/helpers'
 import Moment from 'moment'
 import Comentarios from './Comentarios'
+import { Redirect } from 'react-router-dom'
 
 class Post extends Component {
+
+  state = {
+    redirect: false
+  }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/erro404' />
+    }
+  }
+
   componentDidMount() {
     this.props.callCarregarPostagem(this.props.match.params.id)
     this.props.callCarregarComentarios(this.props.match.params.id)
   }
 
-  componentWillReceiveProps(nextProps) {
-    let postagem = nextProps.postagem.postagem
+  // componentWillReceiveProps(nextProps) {
+  //   let postagem = nextProps.postagem.postagem
 
-    if(postagem.deleted === true) {
-      window.location = '/erro404'
-    }
-  }
+  //   // if(postagem !== undefined) {
+  //   //   window.location = '/erro404'
+  //   // }
+  // }
 
   handleExcluirPostagem = (id) => {
     let confirm = window.confirm('Deseja mesmo excluir este registro?')
@@ -42,42 +58,53 @@ class Post extends Component {
     let postagem = this.props.postagem.postagem
     let comentarios = this.props.comentarios.comentarios
 
-    return (
-      <main>
-        <div className="voltar-btn-wrapper">
-          <button><Link to="/">Voltar</Link></button>
-        </div>
-        <section className="post-wrapper">
-          <div className="post-header">
+    if(postagem.deleted === false) {
+      return (
+        <main>
+          <div className="voltar-btn-wrapper">
+            <button><Link to="/">Voltar</Link></button>
+          </div>
+          <section className="post-wrapper">
+            <div className="post-header">
+              <div>
+                <h3>{postagem.title}</h3>
+                <span className="small">
+                  Por {postagem.author} em {Moment.unix(postagem.timestamp/1000).format('DD/MM/YYYY')}
+                </span>
+                <Link className="categoria-item" to="#">
+                  {postagem.category !== undefined && capitalize(postagem.category)}
+                </Link>
+              </div>
+              <div className="votes-wrapper">
+                <span>{comentarios.length} comentarios | </span>
+                <span>{postagem.voteScore} votos</span>
+                <button style={{'marginRight':'5px'}} onClick={() => this.handleVotar(postagem.id, 'upVote')}>+1</button>
+                <button onClick={() => this.handleVotar(postagem.id, 'downVote')}>-1</button>
+              </div>
+            </div>
+            <hr/>
+            <div className="post-body">
+              {postagem.body}
+            </div>
             <div>
-              <h3>{postagem.title}</h3>
-              <span className="small">
-                Por {postagem.author} em {Moment.unix(postagem.timestamp/1000).format('DD/MM/YYYY')}
-              </span>
-              <Link className="categoria-item" to="#">
-                {postagem.category !== undefined && capitalize(postagem.category)}
-              </Link>
+              <button style={{ 'marginRight':'5px' }}><Link to={`/postagens/${postagem.id}/editar`}>Editar</Link></button>
+              <button onClick={() => this.handleExcluirPostagem(postagem.id)}>Excluir</button>
             </div>
-            <div className="votes-wrapper">
-              <span>{comentarios.length} comentarios | </span>
-              <span>{postagem.voteScore} votos</span>
-              <button style={{'marginRight':'5px'}} onClick={() => this.handleVotar(postagem.id, 'upVote')}>+1</button>
-              <button onClick={() => this.handleVotar(postagem.id, 'downVote')}>-1</button>
-            </div>
-          </div>
-          <hr/>
-          <div className="post-body">
-            {postagem.body}
-          </div>
-          <div>
-            <button style={{ 'marginRight':'5px' }}><Link to={`/postagens/${postagem.id}/editar`}>Editar</Link></button>
-            <button onClick={() => this.handleExcluirPostagem(postagem.id)}>Excluir</button>
-          </div>
-          <hr/>
-        </section>
-        <Comentarios id={this.props.match.params.id}/>
-      </main>
-    )
+            <hr/>
+          </section>
+          <Comentarios id={this.props.match.params.id}/>
+        </main>
+      )
+        
+    }else{
+
+      return (
+        <div>
+        {this.setRedirect()}
+         {this.renderRedirect()}
+        </div>
+     )
+    }
   }
 }
 
