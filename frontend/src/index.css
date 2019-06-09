@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #000;
+  height: 70px;
+  color: white;
+  text-align: center;
+  line-height: 70px;
+  position: relative;
+}
+
+header h1 {
+  font-size: 32px;
+}
+
+header h1 a {
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
+h1:hover {
+  text-decoration: underline;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button:hover {
+  cursor: pointer;
+}
+textarea {
+  min-height: 100px;
+}
+.small {
+  font-size: 12px;
+}
+.form-group:not(.last-child) {
+  margin-bottom: 10px;
+}
+.categorias-list {
+  list-style: armenian;
+  padding-left: 0;
+}
+.categorias-list li {
+  display: inline-block;
+  margin: 20px;
+}
+.categorias-list li a, .categoria-item {
+  background-color: #ccc;
+  padding: 5px;
+}
+.categorias-list li a:hover {
+  background: #999;
+}
+.categorias-wrapper{
+  background-color: beige;
+}
+.categorias-wrapper, .posts-table-wrapper {
+  padding: 10px;
+}
+.voltar-btn-wrapper {
+  margin: 10px;
+}
+.voltar-btn-wrapper button {
+  padding: 0;
+}
+.voltar-btn-wrapper a {
+  display: inline-block;
+  padding: 5px;
+}
+.h3-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.h3-wrapper h3 {
+  margin: 10px 0;
+}
+.ordenar-por label {
+  font-style: initial;
+  font-kerning: normal;
+  padding-right: 5px;
+}
+.posts-table-wrapper{
+  background-color: darkgrey;
+}
+.posts-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.posts-table th {
+  background-color: #ccc;
+  padding: 5px;
+}
+.posts-table th, .posts-table td {
+  border: 1px solid black;
+}
+.posts-table td {
+  padding: 3px;
+}
+.posts-table td button {
+  padding: 0;
+  background-color: salmon;
+}
+.posts-table td button a {
+  padding: 5px;
+}
+.post-form, .comentario-form {
+  width: 100%;
+  max-width: 600px;
+}
+.post-form label, .post-form input, .post-form select, .post-form textarea, .comentario-form input, .comentario-form textarea {
+  width: 100%;
+}
+.post-form label {
+  margin-right: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+.post-header, .comentario-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-header h3 {
+  margin: 0 0 10px 0;
+}
+.nova-postagem-button{
+  margin-top: 5px;
+  color: white;
+  background-color: green;
+  height: 30px;
+  margin-left: 90%;
+}
+.categoria-item {
+  margin-left: 10px;
+}
+.votes-wrapper {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+.votes-wrapper span {
+  margin-right: 10px;
+}
+.post-body {
+  margin: 15px 0;
+}
+.comentario-body {
+  margin-top: 5px;
+}
+.comentario-footer {
+  margin-top: 10px;
+}
+.comentario-form button {
+  margin-top: 5px;
+}
+.comentario:last-of-type hr {
+  display: none;
+}
+.erro404-wrapper {
+  text-align: center;
+}
+.erro404-wrapper a {
+  color: blue;
+}
+.erro404-wrapper a:hover {
+  color: darkblue;
+}
